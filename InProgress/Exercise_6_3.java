@@ -21,11 +21,12 @@ import java.util.Scanner;
 		}	
 /**
  * This method is used to take the number and reverse it
- * <pre>Example:
+ * <pre>Examples:
  * {@code reverse(123) returns: 321
+    reverse(345) returns: 543
  * </pre>
  * @param number (int; the number from the user to reverse)
- * @return 
+ * @return (reverse; the original number reversed)
  */
 		public static int reverse(int number) {	
 			int last;
