@@ -20,8 +20,8 @@ import java.util.Scanner;
  * @author Isaac Bezzant
  */
 public class Exercise06_31 {
-/** This method is used to get the user input for the credit card number to be tested and calling on isValid to see if the number is valid
- */
+	/** This method is used to get the user input for the credit card number to be tested and calling on isValid to see if the number is valid
+	*/
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter a credit card number as a long integer: ");
@@ -32,21 +32,26 @@ public class Exercise06_31 {
 		else
 			System.out.println(number + " is invalid"); 
 	}
-/**This method is used to call on the other methods to test a number against the parameters to see if it could be a valid credit card number
- * <pre>Examples: 
- * {@code isValid(1234567891112L) returns: False
- *   isValid(4388576018410707L) returns: True} </pre>
- *   @return isValid(boolean; true if meets all parameters, false if doesnt meet all parameters
- */
-	/** Return true if the card number is valid */
+	/**This method is used to call on the other methods to test a number against the parameters to see if it could be a valid credit card number (Step 5)
+	* <pre>Examples: 
+	* {@code isValid(1234567891112L) returns: False
+	*   isValid(4388576018410707L) returns: True} </pre>
+	*   @param number (long; the users given number to be tested for validity)
+	*   @return isValid (boolean; true if meets all parameters, false if does not meet all parameters)
+	*/
 	public static boolean isValid(long number) {
 		return  (getSize(number) >= 13) && (getSize(number) <= 16) && 
 				(prefixMatched(number, 4) || prefixMatched(number, 5) ||
 				prefixMatched(number, 6) || prefixMatched(number, 37)) && 
 			 (sumOfDoubleEvenPlace(number) + sumOfOddPlace(number)) % 10 == 0;
 	}
-
-	/** Get the result from Step 2 */
+	/**This method is used to add all of the numbers with the getDigit method (Step 2)
+	* <pre>Examples:
+	* {@code sumOfDoubleEvenPlace(4388576018410707L) returns: 29
+	* sumOfDoubleEvenPlace(1234567891011L) returns: 26} </pre>
+	* @param number (long; the users given number to be tested)
+	* @return result (int; the sum of the numbers from using the getDigit method)
+	*/
 	public static int sumOfDoubleEvenPlace(long number) {
 		int result = 0;
 		
@@ -58,14 +63,25 @@ public class Exercise06_31 {
 		
 		return result;
 	}
-	
-	/** Return this number if it is a single digit, otherwise, return 
-	 * the sum of the two digits */
+	/**This method is used to return the number if it is a single digit, otherwise return the two digits added together (step 1)
+	 * <pre>Examples:
+	 * {@code getDigit(1234567891) returns: 123456790
+	 * getDigit(438857601) returns: 43885761 
+	 * } </pre>
+	 * @param number (int; the number given by the user to be tested)
+	 * @return {@code number % 10 + (number / 10)} (int; the number if it is a single digit, or the sum of the two digits)
+	 */
 	public static int getDigit(int number) {
 		return number % 10 + (number / 10);
 	}
 	
-	/** Return sum of odd place digits in number */
+	/**This method is used to get the sum of all the odd place digits in the number (step 3)
+	 * <pre>Examples:
+	 * {@code sumOfOddPlace(4388576018410707L) returns: 41
+	 *  sumOfOddPlace(1234567891011L) returns: 26} </pre>
+	 * @param number (long; user input for card number to be tested)
+	 * @return result (int; the sum of odd place digits in the number)
+	 */
 	public static int sumOfOddPlace(long number) {
 		int result = 0;
 	 
@@ -76,13 +92,25 @@ public class Exercise06_31 {
 		
 		return result;
 	}
-	
-	/** Return true if the number d is a prefix for number */
+	/**This method is used to determine if the number d is a prefix for the number 
+	 * <pre>Examples: 
+	 * {@code prefixMatched(1234567891, 1) returns: True
+	 * prefixedMatched(4288576018410707L, 3) returns: False} </pre>
+	 * @param number (long; the number from the user to be tested)
+	 * @param d (int; the number to be tested as a prefix for the number)
+	 * @return {@code getPrefix(number, getSize(d)) ==d} (boolean; whether the number d is a prefix for the number or not)  
+	 */
 	public static boolean prefixMatched(long number, int d) {
 		return getPrefix(number, getSize(d)) == d;
 	}
 	
 	/** Return the number of digits in d */
+	/**This method is used to total the number of digits in d
+	 * <pre> Examples: 
+	 * {@code } </pre> 
+	 * @param d (long; the number to be tested for number of digits)
+	 * @return numberOfDigits (int; the amount of digits in d)
+	 */
 	public static int getSize(long d) {
 		int numberOfDigits = 0;
 		
