@@ -14,13 +14,13 @@ In 1954, Hans Luhn of IBM proposed an algorithm for validating credit card numbe
 */
 package jd_31;
 import java.util.Scanner;
-/**<h1> Exercise 6-31 was created to test and see if a could be used as a credit card number</h1>
- * <p> Exercise 6-31 runs a series of tests to determine whether a number could be a credit card number, tests include parameters that must be met like size </p>
+/**<h1> Exercise 06-31 was created to test and see if a number could be used as a credit card number</h1>
+ * <p> Exercise 06-31 runs a series of tests to determine whether a number could be a credit card number, tests include parameters that must be met like size </p>
  * <p>Created on Jan 7 </p>
- * @author Isaac Bezzant
+ * @author Unknown, Junit test case and Javadocs created by Isaac Bezzant
  */
 public class Exercise06_31 {
-	/** This method is used to get the user input for the credit card number to be tested and calling on isValid to see if the number is valid
+	/** This method is used to get the user input for the credit card number to be tested and call on isValid to see if the number is valid
 	*/
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -104,10 +104,10 @@ public class Exercise06_31 {
 		return getPrefix(number, getSize(d)) == d;
 	}
 	
-	/** Return the number of digits in d */
 	/**This method is used to total the number of digits in d
 	 * <pre> Examples: 
-	 * {@code } </pre> 
+	 * {@code getSize(12345678910) returns: 11
+	 *  getSize(1110987654321) returns: 13 } </pre> 
 	 * @param d (long; the number to be tested for number of digits)
 	 * @return numberOfDigits (int; the amount of digits in d)
 	 */
@@ -122,8 +122,14 @@ public class Exercise06_31 {
 		return numberOfDigits;
 	}
 	
-	/** Return the first k number of digits from number. If the number
-	 * of digits in number is less than k, return number. */
+	/** This method is used to get the first k digits in the number as the prefix, or return the number if k is less than the length of the number
+	 * <pre>Examples: 
+	 * {@code getPrefix(12345678910, 3) Returns: 123
+	 *  getPrefix(12345678911, 5) Returns: 12345} </pre>
+	 * @param number (long; number to be tested from user)
+	 * @param k (int; the amount of the first numbers to be returned as the prefix)
+	 * @return result (long; the prefix, or the first k digits in the number)
+	 */
 	public static long getPrefix(long number, int k) {
 		long result = number;
 		
