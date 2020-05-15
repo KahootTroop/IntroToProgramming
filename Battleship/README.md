@@ -65,5 +65,9 @@ assertEquals(Battleship.getColTile('letter', "ABCDEFGH".toCharArray()), result);
 
 ## Files explained
 Battleship.java- The code for the game
+
+
 BattleshipTest.java- The Junit4 Test
+
+
 Battleship.zip- the full project in a zipped folder(contains code, Junit test, and Javadocs files)
