@@ -96,13 +96,35 @@ public class Battleship {
 	    String hit = "X";
 	    String miss = "O";
 	    int hitCount = 0;
-	    char userColTile;
+	    int doTry = 0;
+	    int rowTile = 0;
+	    char userColTile = 'a';
 		do {
             oneHit(oneHitBoard);
-            System.out.println("Enter the number of the row of the tile you would like to attack: ");
-            int rowTile = user.nextInt();
-            System.out.println("Enter the letter of the column of the tile you would like to attack: ");
-            userColTile = user.next().charAt(0);
+            do {
+                System.out.print("Enter the number of the row you would like to attack: ");
+                try {
+                    rowTile = Integer.parseInt(user.next());
+                }
+                catch(Exception e) {
+                    System.out.println("Please enter a correct number...");
+                    doTry = 1;
+                }
+            } while(doTry == 1);
+            doTry = 0;
+            do {
+                System.out.print("Enter the letter of the column you would like to attack: ");
+                String letterCheck = user.next();
+               if(Character.isLetter(letterCheck.charAt(0))) {
+                   userColTile = letterCheck.charAt(0);
+                   doTry = 0;
+               }
+               else {
+                    System.out.println("Please enter a correct letter...");
+                    doTry = 1;
+               }
+            }while(doTry == 1);
+            doTry = 0;
             int colTile = getColTile(userColTile, columnLetters);
             if(oneHitBoard[rowTile][colTile] == "-") {
                 tempCheck1 = 1;
@@ -150,13 +172,35 @@ public class Battleship {
         String hit = "X";
         String miss = "O";
         int hitCount = 0;
-        char userColTile;
+        int rowTile = 0;
+        int doTry = 0;
+        char userColTile = 'a';
         do {
             twoHit(twoHitBoard);
-            System.out.println("Enter the number of the row of the tile you would like to attack: ");
-            int rowTile = user.nextInt();
-            System.out.println("Enter the letter of the column of the tile you would like to attack: ");
-            userColTile = user.next().charAt(0);
+            do {
+                System.out.print("Enter the number of the row you would like to attack: ");
+                try {
+                    rowTile = Integer.parseInt(user.next());
+                }
+                catch(Exception e) {
+                    System.out.println("Please enter a correct number...");
+                    doTry = 1;
+                }
+            } while(doTry == 1);
+            doTry = 0;
+            do {
+                System.out.print("Enter the letter of the column you would like to attack: ");
+                String letterCheck = user.next();
+               if(Character.isLetter(letterCheck.charAt(0))) {
+                   userColTile = letterCheck.charAt(0);
+                   doTry = 0;
+               }
+               else {
+                    System.out.println("Please enter a correct letter...");
+                    doTry = 1;
+               }
+            }while(doTry == 1);
+            doTry = 0;
             int colTile = getColTile(userColTile, columnLetters);
             if(twoHitBoard[rowTile][colTile] == "-") {
                 tempCheck1 = 1;
@@ -195,31 +239,63 @@ public class Battleship {
 	 */
 	public static void generateBattleShipOne(String[][] userOneBoard, Scanner user, char[] columnLetters, String battleship) {
 	    String temp;
-	    char userColTile;
-	    int userRowTile;
+	    char userColTile = 'a';
+	    int userRowTile = 0;
 	    int colTile = 0;
+	    int doTry = 0;
 	    System.out.println("User One will now place their battleships, press enter when ready: ");
 	    temp = user.nextLine();
 	    clearScreen();
         for(int i = 0; i < 5; i++) {
             switch(i) {
                 case 0:
+                	int direction = 0;
                     System.out.println("User One will now place the battleship 'Carrier'(Length of 5), press enter to continue: ");
                     temp = user.nextLine();
                     int tempCheck = 0;
                     int tempCheck1 = 0;
                     do {
                         printOne(userOneBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+	                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+	                        try {
+	                        	direction = Integer.parseInt(user.next());
+	                        	doTry = 0;
+	                        }
+	                        catch(Exception e) {
+	                        	System.out.println("Please enter a correct number...");
+	                        	doTry = 1;
+	                        }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printOne(userOneBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+	                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+	                                try {
+	                                	userRowTile = Integer.parseInt(user.next());
+	                                }
+	                                catch(Exception e) {
+	                                	System.out.println("Please enter a correct number...");
+	                                	doTry = 1;
+	                                }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+	                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+	                                String letterCheck = user.next();
+	                               if(Character.isLetter(letterCheck.charAt(0))) {
+	                            	   userColTile = letterCheck.charAt(0);
+	                            	   doTry = 0;
+	                               }
+	                               else {
+	                                	System.out.println("Please enter a correct letter...");
+	                                	doTry = 1;
+	                               }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 int check1 = 0;
                                 int tempStack1 = 0;
@@ -266,10 +342,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 int check1 = 0;
                                 int tempCheck2 = 0;
@@ -337,19 +433,50 @@ public class Battleship {
                     temp = user.nextLine();
                     tempCheck = 0;
                     tempCheck1 = 0;
+                    direction = 0;
                     int check1;
                     do {
                         printOne(userOneBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printOne(userOneBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -402,10 +529,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -463,18 +610,49 @@ public class Battleship {
                     temp = user.nextLine();
                     tempCheck = 0;
                     tempCheck1 = 0;
+                    direction = 0;
                     do {
                         printOne(userOneBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printOne(userOneBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -527,10 +705,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -588,18 +786,49 @@ public class Battleship {
                     temp = user.nextLine();
                     tempCheck = 0;
                     tempCheck1 = 0;
+                    direction = 0;
                     do {
                         printOne(userOneBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printOne(userOneBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -652,10 +881,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -713,18 +962,49 @@ public class Battleship {
                     temp = user.nextLine();
                     tempCheck = 0;
                     tempCheck1 = 0;
+                    direction = 0;
                     do {
                         printOne(userOneBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printOne(userOneBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -777,10 +1057,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -846,9 +1146,11 @@ public class Battleship {
 	 */
     public static void generateBattleShipTwo(String[][] userTwoBoard, Scanner user, char[] columnLetters, String battleship) {
         String temp;
-        char userColTile;
-        int userRowTile;
+        char userColTile = 0;
+        int userRowTile = 0;
         int colTile = 0;
+        int doTry = 0;
+        int direction = 0;
         System.out.println("User Two will now place their battleships, press enter when ready: ");
         temp = user.nextLine();
         clearScreen();
@@ -861,16 +1163,58 @@ public class Battleship {
                     int tempCheck1 = 0;
                     do {
                         printTwo(userTwoBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printTwo(userTwoBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                	System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                	try {
+                                		userColTile = user.next().charAt(0);
+                                		doTry = 0;
+                                	}
+                                	catch(Exception e) {
+                                		System.out.println("Please enter a correct letter...");
+                                		doTry = 1;
+                                	}
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 int check1 = 0;
                                 int tempStack1 = 0;
@@ -917,10 +1261,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 int check1 = 0;
                                 int tempCheck2 = 0;
@@ -991,16 +1355,46 @@ public class Battleship {
                     int check1;
                     do {
                         printTwo(userTwoBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printTwo(userTwoBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -1053,10 +1447,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -1116,16 +1530,46 @@ public class Battleship {
                     tempCheck1 = 0;
                     do {
                         printTwo(userTwoBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printTwo(userTwoBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -1178,10 +1622,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -1241,16 +1705,47 @@ public class Battleship {
                     tempCheck1 = 0;
                     do {
                         printTwo(userTwoBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printTwo(userTwoBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
+
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -1303,10 +1798,31 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
+
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
@@ -1366,16 +1882,46 @@ public class Battleship {
                     tempCheck1 = 0;
                     do {
                         printTwo(userTwoBoard);
-                        System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
-                        int direction = user.nextInt();
+                        do {
+                            System.out.println("Would you like to place the battleship going up/down or right/left? Type 1 for up/down or 2 for right/left: ");
+                            try {
+                                direction = Integer.parseInt(user.next());
+                                doTry = 0;
+                            }
+                            catch(Exception e) {
+                                System.out.println("Please enter a correct number...");
+                                doTry = 1;
+                            }
+                        }while(doTry == 1);
+                        doTry = 0;
                         if (direction == 1) {
                             tempCheck = 1;
                             do {
                                 printTwo(userTwoBoard);
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                                do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempStack1 = 0;
@@ -1428,10 +1974,30 @@ public class Battleship {
                         else if (direction == 2) {
                             tempCheck = 1;
                             do {
-                                System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
-                                userRowTile = user.nextInt();
-                                System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
-                                userColTile = user.next().charAt(0);
+                            	do {
+                                    System.out.print("Enter the number of the row you would like your battleship to be placed on: ");
+                                    try {
+                                        userRowTile = Integer.parseInt(user.next());
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println("Please enter a correct number...");
+                                        doTry = 1;
+                                    }
+                                } while(doTry == 1);
+                                doTry = 0;
+                                do {
+                                    System.out.print("Enter the letter of the column you would like your battleship to be placed on: ");
+                                    String letterCheck = user.next();
+                                   if(Character.isLetter(letterCheck.charAt(0))) {
+                                       userColTile = letterCheck.charAt(0);
+                                       doTry = 0;
+                                   }
+                                   else {
+                                        System.out.println("Please enter a correct letter...");
+                                        doTry = 1;
+                                   }
+                                }while(doTry == 1);
+                                doTry = 0;
                                 colTile = getColTile(userColTile, columnLetters);
                                 check1 = 0;
                                 int tempCheck2 = 0;
